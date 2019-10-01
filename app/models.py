@@ -1,6 +1,6 @@
 from app import db
 
-class Bucketlust(db.Model):
+class Bucketlist(db.Model):
     """
     This class repressent the bucketlist table.
     """
@@ -19,14 +19,16 @@ class Bucketlust(db.Model):
         self.name = name
 
     def save(self):
-        pass
+        db.session.add(self)
+        de.session.commit()
 
     @staticmethod
     def get_all():
-        pass
+        return Bucketlist.query.all()
 
     def delete(self):
-        pass
+        db.session.delete(self)
+        db.session.commit()
 
     def __repr__(self):
-        pass
+        return "f<Bucketlist: {self.name}"
