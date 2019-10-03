@@ -12,10 +12,18 @@ class BucketListTestCase(unittest.TestCase):
     """
 
     def setUp(self):
-        pass
+        """
+        Initialize app and test variables
+        """
+        self.app = create_app(config_name="testing")
+        self.client = self.app.test_client
+        self.bucketlist = {'name': 'Go to dubai for vacay'}
 
     def test_bucketlist_creation(self):
-        pass
+        """
+        Create all tables
+        """
+        db.create_all()
 
     def test_api_get_all(self):
         pass
