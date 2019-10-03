@@ -1,7 +1,39 @@
 import unittest
-import  os
+import os 
 import json
 from app import create_app, db
 
 class BucketListTestCase(unittest.TestCase):
-    pass
+    """
+    Class representing the bucketlist testcase
+    
+    Arguments:
+        unittest {[type]} -- [description]
+    """
+
+    def setUp(self):
+        pass
+
+    def test_bucketlist_creation(self):
+        pass
+
+    def test_api_get_all(self):
+        pass
+
+    def test_api_get_single_item(self):
+        pass
+
+    def test_edit_item(self):
+        pass
+
+    def test_delete_items(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+    
