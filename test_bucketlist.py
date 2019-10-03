@@ -36,14 +36,36 @@ class BucketListTestCase(unittest.TestCase):
         res = self.client().post('/bucketlists/', data=self.bucketlist)
         self.assertEqual(res.status_code, 201)
         self.assertIn('Go to dubai', str(res.data))
+
+
     def test_api_get_all(self):
-        pass
+        """
+        test if API can ge a bucket list(GET)
+        """
+        res = self.client().post('/bucketlists/', data=self.bucketlist)
+        self.assertEqual(res.status_code, 201)
+        res = self.client().get('/bucketlists/')
+        self.assertEqual(res.status_code, 200)
+        self.assertIn('Go to dubai', str(res.data))
 
     def test_api_get_single_item(self):
-        pass
+        """
+        test if API can get a single bucketlist
+        """
+        rv = self.client().post('/bucketlists/', data=self.bucketlist)
+        self.assertEqual(rv.status_code, 201)
+        result_in_json = json.loads(rv.data.decode('utf-8').replace("'","\""))
+        result = self.client().get(('/bucketlists/{}'.format(result_in_json['id'])))
+        self.assertEqual(result.status_code, 200)
+        self.assertIn('Go to dubai', str(result.data))
 
     def test_edit_item(self):
-        pass
+        """
+        Test if API can edit existing items
+        """
+        rv = self.client().post('/bucketlists/', data = {'name', 'Eat, pray and love'})
+        self.assertEqual(rv.status_code, 201)
+        rv = self.client
 
     def test_delete_items(self):
         pass
