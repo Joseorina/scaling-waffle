@@ -19,12 +19,23 @@ class BucketListTestCase(unittest.TestCase):
         self.client = self.app.test_client
         self.bucketlist = {'name': 'Go to dubai for vacay'}
 
+        """
+        Bind app to current context
+        """
+
+        with self.app.app_context():
+            """
+            Create all tables
+            """
+            db.create_all()
+    
     def test_bucketlist_creation(self):
         """
-        Create all tables
+        test if API endpoint can create an item(POST)
         """
-        db.create_all()
-
+        res = self.client().post('/bucketlists/', data=self.bucketlist)
+        self.assertEqual(res.status_code, 201)
+        self.assertIn('Go to dubai', str(res.data))
     def test_api_get_all(self):
         pass
 
