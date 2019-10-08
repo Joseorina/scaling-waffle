@@ -1,37 +1,35 @@
 import os
 
+
 class Config(object):
-    """
-    parent config class
-    """
+    """Parent configuration class."""
     DEBUG = False
     CSRF_ENABLED = True
     SECRET = os.getenv('SECRET')
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+
 
 class DevelopmentConfig(Config):
-    """
-    Development configuration
-    """
+    """Configurations for Development."""
     DEBUG = True
 
+
 class TestingConfig(Config):
-    """
-    Testing configuration with a separate DATABASE
-    """
+    """Configurations for Testing, with a separate test database."""
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "b_name='scaling-waffle' host='localhost' port='5432' user='postgres' password='toor'"
+    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/test_db'
     DEBUG = True
 
 class StagingConfig(Config):
-    """
-    configuration for staging
-    """
+    """Configurations for Staging."""
     DEBUG = True
 
+
 class ProductionConfig(Config):
+    """Configurations for Production."""
     DEBUG = False
     TESTING = False
+
 
 app_config = {
     'development': DevelopmentConfig,
